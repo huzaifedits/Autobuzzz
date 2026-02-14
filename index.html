@@ -16,9 +16,14 @@ body.light{
   color:#111;
 }
 body.light .services,
-body.light .before-after{background:#fff;}
-body.light .service{background:#eee;color:#000;}
-body.light .contact{background:#f5f5f5;}
+body.light .contact,
+body.light .before-after{
+  background:#fff;
+}
+body.light .service{
+  background:#eee;
+  color:#000;
+}
 
 /* THEME TOGGLE */
 .theme-toggle{
@@ -60,7 +65,7 @@ body.light .contact{background:#f5f5f5;}
 }
 
 .logo{
-  width:240px;
+  width:220px;
   margin-bottom:5px;
   animation:float 3s ease-in-out infinite, glowPulse 2.5s ease-in-out infinite;
 }
@@ -146,35 +151,38 @@ body.light .contact{background:#f5f5f5;}
 
 /* BEFORE AFTER */
 .before-after{
-  padding:60px 20px;
-  background:#0a0a0a;
+  padding:70px 20px;
   text-align:center;
+  background:#000;
 }
 .before-after h2{
   color:gold;
-  margin-bottom:25px;
-  font-size:30px;
+  font-size:34px;
+  margin-bottom:30px;
 }
-.ba-container{
+
+.slider-container{
   position:relative;
   max-width:700px;
   margin:auto;
   overflow:hidden;
-  border-radius:12px;
+  border-radius:14px;
 }
-.ba-img{
+
+.slider-container img{
   width:100%;
   display:block;
 }
-.ba-overlay{
+
+.after-img{
   position:absolute;
   top:0;
   left:0;
   width:50%;
-  height:100%;
   overflow:hidden;
 }
-#slider{
+
+.slider{
   width:100%;
   margin-top:15px;
 }
@@ -210,16 +218,15 @@ body.light .contact{background:#f5f5f5;}
   50%{transform:translateY(-8px);}
 }
 
-/* ANIMATIONS */
 @keyframes fadeUp{
-  from{opacity:0;transform:translateY(30px);}
+  from{opacity:0;transform:translateY(40px);}
   to{opacity:1;transform:translateY(0);}
 }
 
 /* MOBILE */
 @media(max-width:768px){
   .hero h1{font-size:32px;}
-  .logo{width:180px;}
+  .logo{width:170px;}
 }
 </style>
 </head>
@@ -245,30 +252,30 @@ body.light .contact{background:#f5f5f5;}
 <section class="services" id="services">
   <h2>Our Services</h2>
   <div class="service-grid">
-    <div class="service">New Car Availability</div>
-    <div class="service">Pre-Owned Certified Cars</div>
-    <div class="service">Financial Services</div>
-    <div class="service">Insurance Services</div>
-    <div class="service">RTO Work</div>
-    <div class="service">Accessories</div>
-    <div class="service">PPF</div>
-    <div class="service">Ceramic / Graphene</div>
-    <div class="service">Glass Coating</div>
-    <div class="service">Teflon</div>
-    <div class="service">Interior & Exterior</div>
-    <div class="service">Deep Cleaning</div>
+    <div class="service" onclick="sendMsg('New Car Availability')">New Car Availability</div>
+    <div class="service" onclick="sendMsg('Pre-Owned Certified Cars')">Pre-Owned Certified Cars</div>
+    <div class="service" onclick="sendMsg('Financial Services')">Financial Services</div>
+    <div class="service" onclick="sendMsg('Insurance Services')">Insurance Services</div>
+    <div class="service" onclick="sendMsg('RTO Work')">RTO Work</div>
+    <div class="service" onclick="sendMsg('Accessories')">Accessories</div>
+    <div class="service" onclick="sendMsg('PPF')">PPF</div>
+    <div class="service" onclick="sendMsg('Ceramic / Graphene Coating')">Ceramic / Graphene</div>
+    <div class="service" onclick="sendMsg('Glass Coating')">Glass Coating</div>
+    <div class="service" onclick="sendMsg('Teflon Coating')">Teflon</div>
+    <div class="service" onclick="sendMsg('Interior & Exterior Detailing')">Interior & Exterior</div>
+    <div class="service" onclick="sendMsg('Deep Cleaning')">Deep Cleaning</div>
   </div>
 </section>
 
 <section class="before-after">
   <h2>Before & After</h2>
-  <div class="ba-container">
-    <img src="before.jpg" class="ba-img">
-    <div class="ba-overlay" id="overlay">
-      <img src="after.jpg" class="ba-img">
+  <div class="slider-container">
+    <img src="before.jpg.jpeg" alt="Before">
+    <div class="after-img" id="afterBox">
+      <img src="after.jpg.jpeg" alt="After">
     </div>
-    <input type="range" min="0" max="100" value="50" id="slider">
   </div>
+  <input type="range" min="0" max="100" value="50" class="slider" id="slider">
 </section>
 
 <section class="contact">
@@ -278,29 +285,36 @@ body.light .contact{background:#f5f5f5;}
   <p>📍 Chhatrapati Sambhaji Nagar, Maharashtra</p>
 </section>
 
-<a href="https://wa.me/919975707903?text=Hello%20Autobuzzz%2C%20I%20want%20more%20information." class="whatsapp-float" target="_blank">💬</a>
+<a href="https://wa.me/919975707903" class="whatsapp-float" target="_blank">💬</a>
 
 <script>
 function toggleTheme(){
   document.body.classList.toggle("light");
 }
 
-/* Service scroll animation */
+function sendMsg(service){
+  let message = `Hello Autobuzzz, I am interested in ${service}. Please share details.`;
+  let url = "https://wa.me/919975707903?text=" + encodeURIComponent(message);
+  window.open(url, '_blank');
+}
+
+/* Slider */
+const slider = document.getElementById("slider");
+const afterBox = document.getElementById("afterBox");
+
+slider.addEventListener("input",()=>{
+  afterBox.style.width = slider.value + "%";
+});
+
+/* Scroll animation */
 const services = document.querySelectorAll(".service");
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("show");
+window.addEventListener("scroll",()=>{
+  services.forEach(el=>{
+    const rect = el.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 50){
+      el.classList.add("show");
     }
   });
-});
-services.forEach(s=>observer.observe(s));
-
-/* Before After slider */
-const slider = document.getElementById("slider");
-const overlay = document.getElementById("overlay");
-slider.addEventListener("input", function(){
-  overlay.style.width = this.value + "%";
 });
 </script>
 
