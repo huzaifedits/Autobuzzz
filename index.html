@@ -1,260 +1,235 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AutoBuzz Car Care</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Autobuzzz - Premium Car Studio</title>
 
 <style>
-:root {
-  --bg: #0a0a0a;
-  --text: #ffffff;
-  --card: #111111;
-  --accent: #00c3ff;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:#000;color:#fff;overflow-x:hidden;transition:0.4s;}
+
+/* LIGHT MODE */
+body.light{
+  background:#f5f5f5;
+  color:#111;
+}
+body.light .services{background:#fff;}
+body.light .service{background:#eee;color:#000;}
+body.light .contact{background:#f5f5f5;}
+
+/* THEME TOGGLE */
+.theme-toggle{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:gold;
+  color:#000;
+  border:none;
+  padding:8px 14px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:bold;
+  z-index:1000;
 }
 
-.light-mode {
-  --bg: #f5f5f5;
-  --text: #111;
-  --card: #ffffff;
+/* HERO */
+.hero{
+  height:100vh;
+  background:url('autobuzzz img.jpeg') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.75);
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  padding:20px;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+.logo{
+  width:220px;
+  margin-bottom:5px;
+  animation:float 3s ease-in-out infinite, glowPulse 2.5s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+@keyframes glowPulse{
+  0%,100%{filter:drop-shadow(0 0 10px gold);}
+  50%{filter:drop-shadow(0 0 25px gold);}
 }
 
-body {
-  background: var(--bg);
-  color: var(--text);
+.hero h1{
+  font-size:42px;
+  letter-spacing:3px;
+  background:linear-gradient(90deg,gold,orange);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero p{margin:12px 0 25px;color:#ccc;}
+
+.btn{
+  background:linear-gradient(90deg,gold,orange);
+  color:#000;
+  padding:12px 28px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
+  display:inline-block;
+}
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 20px gold;
 }
 
-/* Header */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  background: var(--card);
-  position: sticky;
-  top: 0;
-  z-index: 999;
+.insta-btn{
+  display:inline-block;
+  margin-top:12px;
+  background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  color:#fff;
+  padding:10px 22px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
 }
 
-.logo {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--accent);
-  animation: glow 2s infinite alternate;
+/* SERVICES */
+.services{
+  padding:60px 20px;
+  background:#0a0a0a;
+  text-align:center;
+}
+.services h2{
+  color:gold;
+  margin-bottom:30px;
+  font-size:30px;
+}
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:18px;
+}
+.service{
+  background:#111;
+  padding:18px;
+  border-radius:12px;
+  border:1px solid rgba(255,215,0,0.15);
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.4s;
+}
+.service:hover{
+  box-shadow:0 0 20px rgba(255,215,0,0.4);
+  transform:translateY(-5px);
 }
 
-@keyframes glow {
-  from { text-shadow: 0 0 5px var(--accent); }
-  to { text-shadow: 0 0 15px var(--accent); }
+/* CONTACT */
+.contact{
+  padding:60px 20px;
+  text-align:center;
+  background:#000;
+}
+.contact h2{
+  color:gold;
+  margin-bottom:20px;
+}
+.contact p{margin:8px 0;color:#ccc;}
+
+/* WHATSAPP FLOAT */
+.whatsapp-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:#fff;
+  padding:14px 16px;
+  border-radius:50%;
+  font-size:22px;
+  text-decoration:none;
+  box-shadow:0 0 15px #25D366;
+  animation:bounce 2s infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
 }
 
-.toggle-btn {
-  padding: 8px 12px;
-  border: none;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* Hero */
-.hero {
-  height: 70vh;
-  background: url('https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.hero h1 {
-  font-size: 2.2rem;
-  background: rgba(0,0,0,0.6);
-  padding: 15px 20px;
-  border-radius: 10px;
-}
-
-/* Sections */
-section {
-  padding: 50px 20px;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-/* Services */
-.services {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
-  gap: 15px;
-}
-
-.card {
-  background: var(--card);
-  padding: 20px;
-  text-align: center;
-  border-radius: 10px;
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card a {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 8px 12px;
-  background: var(--accent);
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-/* Map */
-.map iframe {
-  width: 100%;
-  height: 300px;
-  border: 0;
-  border-radius: 10px;
-}
-
-/* Contact */
-.contact {
-  text-align: center;
-}
-
-.contact a {
-  display: inline-block;
-  margin: 10px;
-  padding: 10px 18px;
-  background: var(--accent);
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px;
-  background: var(--card);
-  margin-top: 40px;
-}
-
-/* Animation */
-.fade-up {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
-
-.fade-up.show {
-  opacity: 1;
-  transform: translateY(0);
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1{font-size:32px;}
+  .logo{width:170px;}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">AutoBuzz</div>
-  <button class="toggle-btn" onclick="toggleMode()">Light/Dark</button>
-</header>
+<button class="theme-toggle" onclick="toggleTheme()">🌙 / ☀</button>
 
-<section class="hero fade-up">
-  <h1>Premium Car Care & Detailing</h1>
-</section>
+<section class="hero">
+  <div class="hero-content">
+    <img src="logo.png" class="logo" alt="Autobuzzz Logo">
+    <h1>AUTOBUZZZ</h1>
+    <p>Multi Services & Premium Car Studio</p>
 
-<section class="fade-up">
-  <h2>Our Services</h2>
-  <div class="services">
-
-    <div class="card fade-up">
-      <h3>PPF</h3>
-      <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I want to do PPF for my car">Enquire</a>
-    </div>
-
-    <div class="card fade-up">
-      <h3>Ceramic Coating</h3>
-      <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I want ceramic coating">Enquire</a>
-    </div>
-
-    <div class="card fade-up">
-      <h3>Car Wrapping</h3>
-      <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I want car wrapping">Enquire</a>
-    </div>
-
-    <div class="card fade-up">
-      <h3>Interior Cleaning</h3>
-      <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I want interior cleaning">Enquire</a>
-    </div>
-
-    <div class="card fade-up">
-      <h3>Exterior Detailing</h3>
-      <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I want exterior detailing">Enquire</a>
-    </div>
-
-    <div class="card fade-up">
-      <h3>Car Polish</h3>
-      <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I want car polish">Enquire</a>
-    </div>
-
+    <a href="#services" class="btn">Our Services</a>
+    <br><br>
+    <a href="https://wa.me/919975707903?text=Hello%20Autobuzzz%2C%20I%20want%20to%20book%20a%20service." class="btn" target="_blank">Book Service</a>
+    <br>
+    <a href="https://instagram.com/autobuzzz_multiservices" class="insta-btn" target="_blank">Instagram</a>
   </div>
 </section>
 
-<section class="map fade-up">
-  <h2>Our Location</h2>
-  <iframe src="https://maps.google.com/maps?q=Chhatrapati%20Sambhaji%20Nagar&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+<section class="services" id="services">
+  <h2>Our Services</h2>
+  <div class="service-grid">
+    <div class="service" onclick="sendMsg('New Car Availability')">New Car Availability</div>
+    <div class="service" onclick="sendMsg('Pre-Owned Certified Cars')">Pre-Owned Certified Cars</div>
+    <div class="service" onclick="sendMsg('Financial Services')">Financial Services</div>
+    <div class="service" onclick="sendMsg('Insurance Services')">Insurance Services</div>
+    <div class="service" onclick="sendMsg('RTO Work')">RTO Work</div>
+    <div class="service" onclick="sendMsg('Accessories')">Accessories</div>
+    <div class="service" onclick="sendMsg('PPF')">PPF</div>
+    <div class="service" onclick="sendMsg('Ceramic / Graphene Coating')">Ceramic / Graphene</div>
+    <div class="service" onclick="sendMsg('Glass Coating')">Glass Coating</div>
+    <div class="service" onclick="sendMsg('Teflon Coating')">Teflon</div>
+    <div class="service" onclick="sendMsg('Interior & Exterior Detailing')">Interior & Exterior</div>
+    <div class="service" onclick="sendMsg('Deep Cleaning')">Deep Cleaning</div>
+  </div>
 </section>
 
-<section class="contact fade-up">
+<section class="contact">
   <h2>Contact Us</h2>
-  <a href="https://wa.me/91XXXXXXXXXX">WhatsApp</a>
-  <a href="https://instagram.com/YOUR_INSTAGRAM_ID">Instagram</a>
+  <p>📞 Call: 9975707903</p>
+  <p>💬 WhatsApp: 9975707903</p>
+  <p>📍 Chhatrapati Sambhaji Nagar, Maharashtra</p>
 </section>
 
-<footer>
-  <p>© 2026 AutoBuzz Car Care</p>
-</footer>
+<a href="https://wa.me/919975707903?text=Hello%20Autobuzzz%2C%20I%20want%20more%20information." class="whatsapp-float" target="_blank">💬</a>
 
 <script>
-function toggleMode() {
-  document.body.classList.toggle("light-mode");
+function toggleTheme(){
+  document.body.classList.toggle("light");
 }
 
-/* Scroll animation */
-const faders = document.querySelectorAll('.fade-up');
-
-const appearOptions = {
-  threshold: 0.2
-};
-
-const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    entry.target.classList.add('show');
-    observer.unobserve(entry.target);
-  });
-}, appearOptions);
-
-faders.forEach(fader => {
-  appearOnScroll.observe(fader);
-});
+function sendMsg(service){
+  let message = `Hello Autobuzzz, I am interested in ${service}. Please share details.`;
+  let url = "https://wa.me/919975707903?text=" + encodeURIComponent(message);
+  window.open(url, '_blank');
+}
 </script>
 
 </body>
