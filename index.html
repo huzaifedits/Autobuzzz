@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autobuzzz - Premium Car Studio</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:#000;color:#fff;overflow-x:hidden;}
+
+/* HERO */
+.hero{
+  height:100vh;
+  background:url('autobuzzz img.jpeg') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.75);
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  padding:20px;
+  animation:fadeIn 2s ease forwards;
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* LOGO */
+.logo{
+  width:200px;
+  margin-bottom:1px;
+  animation:float 3s ease-in-out infinite, glowPulse 2.5s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+@keyframes glowPulse{
+  0%,100%{filter:drop-shadow(0 0 10px gold);}
+  50%{filter:drop-shadow(0 0 25px gold);}
+}
+
+.hero h1{
+  font-size:42px;
+  letter-spacing:3px;
+  background:linear-gradient(90deg,gold,orange);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero p{margin:12px 0 25px;color:#ccc;}
+
+/* BUTTONS */
+.btn{
+  background:linear-gradient(90deg,gold,orange);
+  color:#000;
+  padding:12px 28px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
+  display:inline-block;
+}
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 20px gold;
+}
+
+.insta-btn{
+  display:inline-block;
+  margin-top:12px;
+  background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  color:#fff;
+  padding:10px 22px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+/* SPARKLES */
+.sparkle{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:gold;
+  border-radius:50%;
+  opacity:0.8;
+  animation:moveSpark 6s linear infinite;
+}
+@keyframes moveSpark{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-200px);}
+}
+
+/* SERVICES */
+.services{
+  padding:60px 20px;
+  background:#0a0a0a;
+  text-align:center;
+}
+.services h2{
+  color:gold;
+  margin-bottom:30px;
+  font-size:30px;
+}
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:18px;
+}
+.service{
+  background:#111;
+  padding:18px;
+  border-radius:12px;
+  border:1px solid rgba(255,215,0,0.15);
+  font-weight:bold;
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.6s ease;
+}
+.service.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.service:hover{
+  box-shadow:0 0 20px rgba(255,215,0,0.4);
+}
+
+/* CONTACT */
+.contact{
+  padding:60px 20px;
+  text-align:center;
+  background:#000;
+}
+.contact h2{
+  color:gold;
+  margin-bottom:20px;
+}
+.contact p{margin:8px 0;color:#ccc;}
+
+/* WHATSAPP FLOAT */
+.whatsapp-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:#fff;
+  padding:14px 16px;
+  border-radius:50%;
+  font-size:22px;
+  text-decoration:none;
+  box-shadow:0 0 15px #25D366;
+  animation:bounce 2s infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1{font-size:32px;}
+  .logo{width:150px;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="sparkle" style="top:80%; left:10%;"></div>
+  <div class="sparkle" style="top:70%; left:80%; animation-delay:2s;"></div>
+  <div class="sparkle" style="top:60%; left:50%; animation-delay:4s;"></div>
+
+  <div class="hero-content">
+    <img src="logo.png" class="logo" alt="Autobuzzz Logo">
+    <h1>AUTOBUZZZ</h1>
+    <p>Multi Services & Premium Car Studio</p>
+
+    <a href="#services" class="btn">Our Services</a>
+    <br><br>
+    <a href="https://wa.me/918149842459" class="btn" target="_blank">Book Service</a>
+    <br>
+    <a href="https://instagram.com/yourusername" class="insta-btn" target="_blank">Instagram</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <h2>Our Services</h2>
+  <div class="service-grid">
+    <div class="service">New Car Availability</div>
+    <div class="service">Pre-Owned Certified Cars</div>
+    <div class="service">Financial Services</div>
+    <div class="service">Insurance Services</div>
+    <div class="service">RTO Work</div>
+    <div class="service">Accessories</div>
+    <div class="service">PPF</div>
+    <div class="service">Ceramic / Graphene</div>
+    <div class="service">Glass Coating</div>
+    <div class="service">Teflon</div>
+    <div class="service">Interior & Exterior</div>
+    <div class="service">Deep Cleaning</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <h2>Contact Us</h2>
+  <p>📞 Call: 8149842459</p>
+  <p>💬 WhatsApp: 8149842459</p>
+  <p>📍 Chhatrapati Sambhaji Nagar, Maharashtra</p>
+
+  <div style="margin-top:20px;">
+    <iframe 
+      src="https://www.google.com/maps?q=Chhatrapati%20Sambhaji%20Nagar&output=embed"
+      width="100%" 
+      height="250" 
+      style="border:0;border-radius:10px;"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
+  </div>
+</section>
+
+<a href="https://wa.me/918149842459" class="whatsapp-float" target="_blank">💬</a>
+
+<script>
+/* Scroll animation for services */
+const services = document.querySelectorAll('.service');
+
+function showServices(){
+  const trigger = window.innerHeight * 0.85;
+  services.forEach(card=>{
+    const top = card.getBoundingClientRect().top;
+    if(top < trigger){
+      card.classList.add('show');
+    }
+  });
+}
+window.addEventListener('scroll', showServices);
+window.addEventListener('load', showServices);
+</script>
+
+</body>
+</html>
