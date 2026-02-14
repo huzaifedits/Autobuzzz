@@ -8,7 +8,31 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
 html{scroll-behavior:smooth;}
-body{background:#000;color:#fff;overflow-x:hidden;}
+body{background:#000;color:#fff;overflow-x:hidden;transition:0.4s;}
+
+/* LIGHT MODE */
+body.light{
+  background:#f5f5f5;
+  color:#111;
+}
+body.light .services{background:#fff;}
+body.light .service{background:#eee;color:#000;}
+body.light .contact{background:#f5f5f5;}
+
+/* THEME TOGGLE */
+.theme-toggle{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:gold;
+  color:#000;
+  border:none;
+  padding:8px 14px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:bold;
+  z-index:1000;
+}
 
 /* HERO */
 .hero{
@@ -31,17 +55,11 @@ body{background:#000;color:#fff;overflow-x:hidden;}
   position:relative;
   z-index:2;
   padding:20px;
-  animation:fadeIn 2s ease forwards;
-}
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(30px);}
-  to{opacity:1;transform:translateY(0);}
 }
 
-/* LOGO */
 .logo{
-  width:200px;
-  margin-bottom:1px;
+  width:220px;
+  margin-bottom:5px;
   animation:float 3s ease-in-out infinite, glowPulse 2.5s ease-in-out infinite;
 }
 @keyframes float{
@@ -62,7 +80,6 @@ body{background:#000;color:#fff;overflow-x:hidden;}
 }
 .hero p{margin:12px 0 25px;color:#ccc;}
 
-/* BUTTONS */
 .btn{
   background:linear-gradient(90deg,gold,orange);
   color:#000;
@@ -89,21 +106,6 @@ body{background:#000;color:#fff;overflow-x:hidden;}
   font-weight:bold;
 }
 
-/* SPARKLES */
-.sparkle{
-  position:absolute;
-  width:6px;
-  height:6px;
-  background:gold;
-  border-radius:50%;
-  opacity:0.8;
-  animation:moveSpark 6s linear infinite;
-}
-@keyframes moveSpark{
-  0%{transform:translateY(0);}
-  100%{transform:translateY(-200px);}
-}
-
 /* SERVICES */
 .services{
   padding:60px 20px;
@@ -126,16 +128,12 @@ body{background:#000;color:#fff;overflow-x:hidden;}
   border-radius:12px;
   border:1px solid rgba(255,215,0,0.15);
   font-weight:bold;
-  opacity:0;
-  transform:translateY(40px);
-  transition:0.6s ease;
-}
-.service.show{
-  opacity:1;
-  transform:translateY(0);
+  cursor:pointer;
+  transition:0.4s;
 }
 .service:hover{
   box-shadow:0 0 20px rgba(255,215,0,0.4);
+  transform:translateY(-5px);
 }
 
 /* CONTACT */
@@ -172,19 +170,16 @@ body{background:#000;color:#fff;overflow-x:hidden;}
 /* MOBILE */
 @media(max-width:768px){
   .hero h1{font-size:32px;}
-  .logo{width:150px;}
+  .logo{width:170px;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="sparkle" style="top:80%; left:10%;"></div>
-  <div class="sparkle" style="top:70%; left:80%; animation-delay:2s;"></div>
-  <div class="sparkle" style="top:60%; left:50%; animation-delay:4s;"></div>
+<button class="theme-toggle" onclick="toggleTheme()">🌙 / ☀</button>
 
+<section class="hero">
   <div class="hero-content">
     <img src="logo.png" class="logo" alt="Autobuzzz Logo">
     <h1>AUTOBUZZZ</h1>
@@ -192,67 +187,49 @@ body{background:#000;color:#fff;overflow-x:hidden;}
 
     <a href="#services" class="btn">Our Services</a>
     <br><br>
-    <a href="https://wa.me/918149842459" class="btn" target="_blank">Book Service</a>
+    <a href="https://wa.me/919975707903?text=Hello%20Autobuzzz%2C%20I%20want%20to%20book%20a%20service." class="btn" target="_blank">Book Service</a>
     <br>
-    <a href="https://instagram.com/yourusername" class="insta-btn" target="_blank">Instagram</a>
+    <a href="https://instagram.com/autobuzzz_multiservices" class="insta-btn" target="_blank">Instagram</a>
   </div>
 </section>
 
-<!-- SERVICES -->
 <section class="services" id="services">
   <h2>Our Services</h2>
   <div class="service-grid">
-    <div class="service">New Car Availability</div>
-    <div class="service">Pre-Owned Certified Cars</div>
-    <div class="service">Financial Services</div>
-    <div class="service">Insurance Services</div>
-    <div class="service">RTO Work</div>
-    <div class="service">Accessories</div>
-    <div class="service">PPF</div>
-    <div class="service">Ceramic / Graphene</div>
-    <div class="service">Glass Coating</div>
-    <div class="service">Teflon</div>
-    <div class="service">Interior & Exterior</div>
-    <div class="service">Deep Cleaning</div>
+    <div class="service" onclick="sendMsg('New Car Availability')">New Car Availability</div>
+    <div class="service" onclick="sendMsg('Pre-Owned Certified Cars')">Pre-Owned Certified Cars</div>
+    <div class="service" onclick="sendMsg('Financial Services')">Financial Services</div>
+    <div class="service" onclick="sendMsg('Insurance Services')">Insurance Services</div>
+    <div class="service" onclick="sendMsg('RTO Work')">RTO Work</div>
+    <div class="service" onclick="sendMsg('Accessories')">Accessories</div>
+    <div class="service" onclick="sendMsg('PPF')">PPF</div>
+    <div class="service" onclick="sendMsg('Ceramic / Graphene Coating')">Ceramic / Graphene</div>
+    <div class="service" onclick="sendMsg('Glass Coating')">Glass Coating</div>
+    <div class="service" onclick="sendMsg('Teflon Coating')">Teflon</div>
+    <div class="service" onclick="sendMsg('Interior & Exterior Detailing')">Interior & Exterior</div>
+    <div class="service" onclick="sendMsg('Deep Cleaning')">Deep Cleaning</div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="contact">
   <h2>Contact Us</h2>
-  <p>📞 Call: 8149842459</p>
-  <p>💬 WhatsApp: 8149842459</p>
+  <p>📞 Call: 9975707903</p>
+  <p>💬 WhatsApp: 9975707903</p>
   <p>📍 Chhatrapati Sambhaji Nagar, Maharashtra</p>
-
-  <div style="margin-top:20px;">
-    <iframe 
-      src="https://www.google.com/maps?q=Chhatrapati%20Sambhaji%20Nagar&output=embed"
-      width="100%" 
-      height="250" 
-      style="border:0;border-radius:10px;"
-      allowfullscreen=""
-      loading="lazy">
-    </iframe>
-  </div>
 </section>
 
-<a href="https://wa.me/918149842459" class="whatsapp-float" target="_blank">💬</a>
+<a href="https://wa.me/919975707903?text=Hello%20Autobuzzz%2C%20I%20want%20more%20information." class="whatsapp-float" target="_blank">💬</a>
 
 <script>
-/* Scroll animation for services */
-const services = document.querySelectorAll('.service');
-
-function showServices(){
-  const trigger = window.innerHeight * 0.85;
-  services.forEach(card=>{
-    const top = card.getBoundingClientRect().top;
-    if(top < trigger){
-      card.classList.add('show');
-    }
-  });
+function toggleTheme(){
+  document.body.classList.toggle("light");
 }
-window.addEventListener('scroll', showServices);
-window.addEventListener('load', showServices);
+
+function sendMsg(service){
+  let message = `Hello Autobuzzz, I am interested in ${service}. Please share details.`;
+  let url = "https://wa.me/919975707903?text=" + encodeURIComponent(message);
+  window.open(url, '_blank');
+}
 </script>
 
 </body>
