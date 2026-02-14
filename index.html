@@ -50,31 +50,19 @@ body.light .contact{background:#f5f5f5;}
   position:absolute;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.7);
+  background:rgba(0,0,0,0.75);
 }
 .hero-content{
   position:relative;
   z-index:2;
   padding:20px;
-  animation:fadeIn 1.8s ease forwards;
+  animation:fadeInUp 2s ease forwards;
+}
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(50px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
-/* SPARKLES */
-.sparkle{
-  position:absolute;
-  width:6px;
-  height:6px;
-  background:gold;
-  border-radius:50%;
-  opacity:0.8;
-  animation:moveSpark 6s linear infinite;
-}
-@keyframes moveSpark{
-  0%{transform:translateY(0);}
-  100%{transform:translateY(-250px);}
-}
-
-/* LOGO */
 .logo{
   width:220px;
   margin-bottom:5px;
@@ -93,43 +81,41 @@ body.light .contact{background:#f5f5f5;}
   font-size:50px;
   letter-spacing:3px;
   color:gold;
-  text-shadow:0 0 10px gold,0 0 20px gold;
-  font-family:'Arial Black', sans-serif;
+  text-shadow:0 0 15px gold,0 0 25px orange,0 0 35px gold;
+  font-weight:bold;
 }
 .hero p{margin:12px 0 25px;color:#ccc;}
 
-/* BUTTONS */
-.btn{
+/* BUTTONS GLOW */
+.btn, .insta-btn{
   background:linear-gradient(90deg,gold,orange);
   color:#000;
   padding:12px 28px;
   border-radius:30px;
   text-decoration:none;
   font-weight:bold;
-  transition:0.4s;
+  transition:0.3s;
   display:inline-block;
-  box-shadow:0 0 12px gold;
+  box-shadow:0 0 8px gold;
 }
-.btn:hover{
+.btn:hover, .insta-btn:hover{
   transform:scale(1.1);
-  box-shadow:0 0 28px gold,0 0 40px gold;
+  box-shadow:0 0 25px gold, 0 0 45px orange;
 }
 
-.insta-btn{
-  display:inline-block;
-  margin-top:12px;
-  background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
-  color:#fff;
-  padding:10px 22px;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:bold;
-  transition:0.4s;
-  box-shadow:0 0 8px #e1306c;
+/* SPARKLES */
+.sparkle{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:gold;
+  border-radius:50%;
+  opacity:0.8;
+  animation:moveSpark 6s linear infinite;
 }
-.insta-btn:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 18px #e1306c;
+@keyframes moveSpark{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-200px);}
 }
 
 /* SERVICES */
@@ -156,17 +142,38 @@ body.light .contact{background:#f5f5f5;}
   font-weight:bold;
   cursor:pointer;
   opacity:0;
-  transform:translateY(40px);
+  transform:translateY(50px);
   transition:0.6s ease, box-shadow 0.4s ease;
-  box-shadow:0 0 5px gold;
 }
 .service.show{
   opacity:1;
   transform:translateY(0);
 }
 .service:hover{
-  box-shadow:0 0 28px rgba(255,215,0,0.6);
+  box-shadow:0 0 25px gold;
   transform:translateY(-5px);
+}
+
+/* BEFORE/AFTER SLIDER */
+.slider-container{
+  position:relative;
+  max-width:800px;
+  margin:50px auto;
+  overflow:hidden;
+  border-radius:15px;
+  border:2px solid gold;
+}
+.slider-container img{
+  width:100%;
+  display:block;
+  transition:0.5s ease;
+}
+.slider-container input[type="range"]{
+  position:absolute;
+  bottom:20px;
+  left:10%;
+  width:80%;
+  z-index:2;
 }
 
 /* CONTACT */
@@ -200,37 +207,10 @@ body.light .contact{background:#f5f5f5;}
   50%{transform:translateY(-8px);}
 }
 
-/* BEFORE-AFTER SLIDER */
-.before-after{
-  position:relative;
-  width:90%;
-  max-width:700px;
-  margin:50px auto;
-  overflow:hidden;
-  border-radius:15px;
-  border:3px solid gold;
-}
-.before-after img{
-  display:block;
-  width:100%;
-  height:auto;
-}
-.before-after .handle{
-  position:absolute;
-  top:0;
-  left:50%;
-  width:4px;
-  height:100%;
-  background:gold;
-  cursor:ew-resize;
-  transform:translateX(-50%);
-  z-index:2;
-}
-
 /* MOBILE */
 @media(max-width:768px){
-  .hero h1{font-size:32px;}
-  .logo{width:170px;}
+  .hero h1{font-size:36px;}
+  .logo{width:150px;}
 }
 </style>
 </head>
@@ -239,6 +219,7 @@ body.light .contact{background:#f5f5f5;}
 
 <button class="theme-toggle" onclick="toggleTheme()">🌙 / ☀</button>
 
+<!-- HERO -->
 <section class="hero">
   <div class="sparkle" style="top:80%; left:10%;"></div>
   <div class="sparkle" style="top:70%; left:80%; animation-delay:2s;"></div>
@@ -257,6 +238,7 @@ body.light .contact{background:#f5f5f5;}
   </div>
 </section>
 
+<!-- SERVICES -->
 <section class="services" id="services">
   <h2>Our Services</h2>
   <div class="service-grid">
@@ -275,13 +257,17 @@ body.light .contact{background:#f5f5f5;}
   </div>
 </section>
 
-<!-- BEFORE-AFTER SLIDER -->
+<!-- BEFORE/AFTER SLIDER -->
 <section class="before-after">
-  <img src="before.jpg" alt="Before">
-  <img src="after.jpg" alt="After" style="position:absolute;top:0;left:0;width:50%;overflow:hidden;">
-  <div class="handle"></div>
+  <h2 style="text-align:center;color:gold;margin:40px 0;">Before & After</h2>
+  <div class="slider-container">
+    <img id="before" src="before.jpg.jpeg" alt="Before">
+    <img id="after" src="after.jpg.jpeg" alt="After" style="position:absolute;top:0;left:0;width:50%;overflow:hidden;">
+    <input type="range" min="0" max="100" value="50" oninput="slideBeforeAfter(this)">
+  </div>
 </section>
 
+<!-- CONTACT -->
 <section class="contact">
   <h2>Contact Us</h2>
   <p>📞 Call: 9975707903</p>
@@ -292,12 +278,19 @@ body.light .contact{background:#f5f5f5;}
 <a href="https://wa.me/919975707903?text=Hello%20Autobuzzz%2C%20I%20want%20more%20information." class="whatsapp-float" target="_blank">💬</a>
 
 <script>
-/* THEME TOGGLE */
+/* Theme Toggle */
 function toggleTheme(){
   document.body.classList.toggle("light");
 }
 
-/* SCROLL ANIMATION FOR SERVICES */
+/* WhatsApp Service Msg */
+function sendMsg(service){
+  let message = `Hello Autobuzzz, I am interested in ${service}. Please share details.`;
+  let url = "https://wa.me/919975707903?text=" + encodeURIComponent(message);
+  window.open(url,'_blank');
+}
+
+/* Scroll animation for services */
 const services = document.querySelectorAll('.service');
 function showServices(){
   const trigger = window.innerHeight * 0.85;
@@ -311,11 +304,10 @@ function showServices(){
 window.addEventListener('scroll', showServices);
 window.addEventListener('load', showServices);
 
-/* SERVICE BUTTONS WHATSAPP MSG */
-function sendMsg(service){
-  let message = `Hello Autobuzzz, I am interested in ${service}. Please share details.`;
-  let url = "https://wa.me/919975707903?text=" + encodeURIComponent(message);
-  window.open(url, '_blank');
+/* Before/After Slider */
+function slideBeforeAfter(range){
+  const after = document.getElementById('after');
+  after.style.width = range.value + "%";
 }
 </script>
 
