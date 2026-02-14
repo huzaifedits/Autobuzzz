@@ -8,33 +8,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
 html{scroll-behavior:smooth;}
-body{background:#000;color:#fff;overflow-x:hidden;transition:0.4s;}
-
-/* LIGHT MODE */
-body.light{
-  background:#f5f5f5;
-  color:#111;
-}
-body.light .services{background:#fff;}
-body.light .service{background:#eee;color:#000;}
-body.light .contact{background:#f5f5f5;}
-body.light .trust{background:#fff;}
-body.light .trust-item{background:#eee;color:#000;}
-
-/* THEME TOGGLE */
-.theme-toggle{
-  position:fixed;
-  top:20px;
-  right:20px;
-  background:gold;
-  color:#000;
-  border:none;
-  padding:8px 14px;
-  border-radius:20px;
-  cursor:pointer;
-  font-weight:bold;
-  z-index:1000;
-}
+body{background:#000;color:#fff;overflow-x:hidden;}
 
 /* HERO */
 .hero{
@@ -57,17 +31,17 @@ body.light .trust-item{background:#eee;color:#000;}
   position:relative;
   z-index:2;
   padding:20px;
-  animation:fadeUp 1.5s ease forwards;
+  animation:fadeIn 2s ease forwards;
 }
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px);}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(30px);}
   to{opacity:1;transform:translateY(0);}
 }
 
+/* LOGO */
 .logo{
-  width:220px;
-  margin-bottom:5px;
+  width:200px;
+  margin-bottom:1px;
   animation:float 3s ease-in-out infinite, glowPulse 2.5s ease-in-out infinite;
 }
 @keyframes float{
@@ -88,6 +62,7 @@ body.light .trust-item{background:#eee;color:#000;}
 }
 .hero p{margin:12px 0 25px;color:#ccc;}
 
+/* BUTTONS */
 .btn{
   background:linear-gradient(90deg,gold,orange);
   color:#000;
@@ -114,15 +89,19 @@ body.light .trust-item{background:#eee;color:#000;}
   font-weight:bold;
 }
 
-/* REVEAL ANIMATION */
-.reveal{
-  opacity:0;
-  transform:translateY(60px) scale(0.95);
-  transition:all 0.9s cubic-bezier(0.17,0.55,0.55,1);
+/* SPARKLES */
+.sparkle{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:gold;
+  border-radius:50%;
+  opacity:0.8;
+  animation:moveSpark 6s linear infinite;
 }
-.reveal.active{
-  opacity:1;
-  transform:translateY(0) scale(1);
+@keyframes moveSpark{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-200px);}
 }
 
 /* SERVICES */
@@ -147,57 +126,16 @@ body.light .trust-item{background:#eee;color:#000;}
   border-radius:12px;
   border:1px solid rgba(255,215,0,0.15);
   font-weight:bold;
-  cursor:pointer;
-  transition:0.4s;
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.6s ease;
+}
+.service.show{
+  opacity:1;
+  transform:translateY(0);
 }
 .service:hover{
-  box-shadow:0 0 25px rgba(255,215,0,0.6);
-  transform:translateY(-8px) scale(1.05);
-}
-
-/* TRUST SECTION */
-.trust{
-  padding:60px 20px;
-  background:linear-gradient(135deg,#111,#000);
-  text-align:center;
-}
-.trust h2{
-  color:gold;
-  margin-bottom:30px;
-}
-.trust-box{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-}
-.trust-item{
-  padding:20px;
-  border-radius:15px;
-  background:#111;
-  border:1px solid rgba(255,215,0,0.2);
-  transition:0.4s;
-}
-.trust-item:hover{
-  transform:scale(1.05);
   box-shadow:0 0 20px rgba(255,215,0,0.4);
-}
-
-/* CTA */
-.cta{
-  padding:60px 20px;
-  text-align:center;
-  background:linear-gradient(90deg,gold,orange);
-  color:#000;
-}
-.cta-btn{
-  display:inline-block;
-  margin-top:15px;
-  padding:14px 30px;
-  background:#000;
-  color:#fff;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:bold;
 }
 
 /* CONTACT */
@@ -234,17 +172,19 @@ body.light .trust-item{background:#eee;color:#000;}
 /* MOBILE */
 @media(max-width:768px){
   .hero h1{font-size:32px;}
-  .logo{width:170px;}
+  .logo{width:150px;}
 }
 </style>
 </head>
 
 <body>
 
-<button class="theme-toggle" onclick="toggleTheme()">🌙 / ☀</button>
-
 <!-- HERO -->
 <section class="hero">
+  <div class="sparkle" style="top:80%; left:10%;"></div>
+  <div class="sparkle" style="top:70%; left:80%; animation-delay:2s;"></div>
+  <div class="sparkle" style="top:60%; left:50%; animation-delay:4s;"></div>
+
   <div class="hero-content">
     <img src="logo.png" class="logo" alt="Autobuzzz Logo">
     <h1>AUTOBUZZZ</h1>
@@ -252,83 +192,67 @@ body.light .trust-item{background:#eee;color:#000;}
 
     <a href="#services" class="btn">Our Services</a>
     <br><br>
-    <a href="https://wa.me/919975707903?text=Hello%20Autobuzzz%2C%20I%20want%20to%20book%20a%20service." class="btn" target="_blank">Book Service</a>
+    <a href="https://wa.me/918149842459" class="btn" target="_blank">Book Service</a>
     <br>
-    <a href="https://instagram.com/autobuzzz_multiservices" class="insta-btn" target="_blank">Instagram</a>
+    <a href="https://instagram.com/yourusername" class="insta-btn" target="_blank">Instagram</a>
   </div>
 </section>
 
 <!-- SERVICES -->
-<section class="services reveal" id="services">
+<section class="services" id="services">
   <h2>Our Services</h2>
   <div class="service-grid">
-    <div class="service" onclick="sendMsg('New Car Availability')">New Car Availability</div>
-    <div class="service" onclick="sendMsg('Pre-Owned Certified Cars')">Pre-Owned Certified Cars</div>
-    <div class="service" onclick="sendMsg('Financial Services')">Financial Services</div>
-    <div class="service" onclick="sendMsg('Insurance Services')">Insurance Services</div>
-    <div class="service" onclick="sendMsg('RTO Work')">RTO Work</div>
-    <div class="service" onclick="sendMsg('Accessories')">Accessories</div>
-    <div class="service" onclick="sendMsg('PPF')">PPF</div>
-    <div class="service" onclick="sendMsg('Ceramic / Graphene Coating')">Ceramic / Graphene</div>
-    <div class="service" onclick="sendMsg('Glass Coating')">Glass Coating</div>
-    <div class="service" onclick="sendMsg('Teflon Coating')">Teflon</div>
-    <div class="service" onclick="sendMsg('Interior & Exterior Detailing')">Interior & Exterior</div>
-    <div class="service" onclick="sendMsg('Deep Cleaning')">Deep Cleaning</div>
+    <div class="service">New Car Availability</div>
+    <div class="service">Pre-Owned Certified Cars</div>
+    <div class="service">Financial Services</div>
+    <div class="service">Insurance Services</div>
+    <div class="service">RTO Work</div>
+    <div class="service">Accessories</div>
+    <div class="service">PPF</div>
+    <div class="service">Ceramic / Graphene</div>
+    <div class="service">Glass Coating</div>
+    <div class="service">Teflon</div>
+    <div class="service">Interior & Exterior</div>
+    <div class="service">Deep Cleaning</div>
   </div>
-</section>
-
-<!-- TRUST -->
-<section class="trust reveal">
-  <h2>Why Choose Autobuzzz</h2>
-  <div class="trust-box">
-    <div class="trust-item">Premium Quality Work</div>
-    <div class="trust-item">Experienced Team</div>
-    <div class="trust-item">Affordable Pricing</div>
-    <div class="trust-item">All Services Under One Roof</div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta reveal">
-  <h2>Book Your Service Today</h2>
-  <p>Fast, Professional & Trusted Car Care</p>
-  <a href="https://wa.me/919975707903?text=Hello%20Autobuzzz%2C%20I%20want%20to%20book%20a%20service." class="cta-btn" target="_blank">Chat on WhatsApp</a>
 </section>
 
 <!-- CONTACT -->
-<section class="contact reveal">
+<section class="contact">
   <h2>Contact Us</h2>
-  <p>📞 Call: 9975707903</p>
-  <p>💬 WhatsApp: 9975707903</p>
+  <p>📞 Call: 8149842459</p>
+  <p>💬 WhatsApp: 8149842459</p>
   <p>📍 Chhatrapati Sambhaji Nagar, Maharashtra</p>
+
+  <div style="margin-top:20px;">
+    <iframe 
+      src="https://www.google.com/maps?q=Chhatrapati%20Sambhaji%20Nagar&output=embed"
+      width="100%" 
+      height="250" 
+      style="border:0;border-radius:10px;"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
+  </div>
 </section>
 
-<a href="https://wa.me/919975707903" class="whatsapp-float" target="_blank">💬</a>
+<a href="https://wa.me/918149842459" class="whatsapp-float" target="_blank">💬</a>
 
 <script>
-function toggleTheme(){
-  document.body.classList.toggle("light");
-}
+/* Scroll animation for services */
+const services = document.querySelectorAll('.service');
 
-function sendMsg(service){
-  let message = `Hello Autobuzzz, I am interested in ${service}. Please share details.`;
-  let url = "https://wa.me/919975707903?text=" + encodeURIComponent(message);
-  window.open(url, '_blank');
-}
-
-/* SCROLL REVEAL */
-const reveals = document.querySelectorAll('.reveal');
-function revealOnScroll(){
-  let trigger = window.innerHeight * 0.85;
-  reveals.forEach(el=>{
-    let top = el.getBoundingClientRect().top;
+function showServices(){
+  const trigger = window.innerHeight * 0.85;
+  services.forEach(card=>{
+    const top = card.getBoundingClientRect().top;
     if(top < trigger){
-      el.classList.add('active');
+      card.classList.add('show');
     }
   });
 }
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
+window.addEventListener('scroll', showServices);
+window.addEventListener('load', showServices);
 </script>
 
 </body>
