@@ -18,6 +18,8 @@ body.light{
 body.light .services{background:#fff;}
 body.light .service{background:#eee;color:#000;}
 body.light .contact{background:#f5f5f5;}
+body.light .trust{background:#fff;}
+body.light .trust-item{background:#eee;color:#000;}
 
 /* THEME TOGGLE */
 .theme-toggle{
@@ -55,6 +57,12 @@ body.light .contact{background:#f5f5f5;}
   position:relative;
   z-index:2;
   padding:20px;
+  animation:fadeUp 1.5s ease forwards;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
 .logo{
@@ -106,6 +114,17 @@ body.light .contact{background:#f5f5f5;}
   font-weight:bold;
 }
 
+/* REVEAL ANIMATION */
+.reveal{
+  opacity:0;
+  transform:translateY(60px) scale(0.95);
+  transition:all 0.9s cubic-bezier(0.17,0.55,0.55,1);
+}
+.reveal.active{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
 /* SERVICES */
 .services{
   padding:60px 20px;
@@ -132,8 +151,53 @@ body.light .contact{background:#f5f5f5;}
   transition:0.4s;
 }
 .service:hover{
+  box-shadow:0 0 25px rgba(255,215,0,0.6);
+  transform:translateY(-8px) scale(1.05);
+}
+
+/* TRUST SECTION */
+.trust{
+  padding:60px 20px;
+  background:linear-gradient(135deg,#111,#000);
+  text-align:center;
+}
+.trust h2{
+  color:gold;
+  margin-bottom:30px;
+}
+.trust-box{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+}
+.trust-item{
+  padding:20px;
+  border-radius:15px;
+  background:#111;
+  border:1px solid rgba(255,215,0,0.2);
+  transition:0.4s;
+}
+.trust-item:hover{
+  transform:scale(1.05);
   box-shadow:0 0 20px rgba(255,215,0,0.4);
-  transform:translateY(-5px);
+}
+
+/* CTA */
+.cta{
+  padding:60px 20px;
+  text-align:center;
+  background:linear-gradient(90deg,gold,orange);
+  color:#000;
+}
+.cta-btn{
+  display:inline-block;
+  margin-top:15px;
+  padding:14px 30px;
+  background:#000;
+  color:#fff;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
 }
 
 /* CONTACT */
@@ -179,6 +243,7 @@ body.light .contact{background:#f5f5f5;}
 
 <button class="theme-toggle" onclick="toggleTheme()">🌙 / ☀</button>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
     <img src="logo.png" class="logo" alt="Autobuzzz Logo">
@@ -193,7 +258,8 @@ body.light .contact{background:#f5f5f5;}
   </div>
 </section>
 
-<section class="services" id="services">
+<!-- SERVICES -->
+<section class="services reveal" id="services">
   <h2>Our Services</h2>
   <div class="service-grid">
     <div class="service" onclick="sendMsg('New Car Availability')">New Car Availability</div>
@@ -211,14 +277,33 @@ body.light .contact{background:#f5f5f5;}
   </div>
 </section>
 
-<section class="contact">
+<!-- TRUST -->
+<section class="trust reveal">
+  <h2>Why Choose Autobuzzz</h2>
+  <div class="trust-box">
+    <div class="trust-item">Premium Quality Work</div>
+    <div class="trust-item">Experienced Team</div>
+    <div class="trust-item">Affordable Pricing</div>
+    <div class="trust-item">All Services Under One Roof</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta reveal">
+  <h2>Book Your Service Today</h2>
+  <p>Fast, Professional & Trusted Car Care</p>
+  <a href="https://wa.me/919975707903?text=Hello%20Autobuzzz%2C%20I%20want%20to%20book%20a%20service." class="cta-btn" target="_blank">Chat on WhatsApp</a>
+</section>
+
+<!-- CONTACT -->
+<section class="contact reveal">
   <h2>Contact Us</h2>
   <p>📞 Call: 9975707903</p>
   <p>💬 WhatsApp: 9975707903</p>
   <p>📍 Chhatrapati Sambhaji Nagar, Maharashtra</p>
 </section>
 
-<a href="https://wa.me/919975707903?text=Hello%20Autobuzzz%2C%20I%20want%20more%20information." class="whatsapp-float" target="_blank">💬</a>
+<a href="https://wa.me/919975707903" class="whatsapp-float" target="_blank">💬</a>
 
 <script>
 function toggleTheme(){
@@ -230,6 +315,20 @@ function sendMsg(service){
   let url = "https://wa.me/919975707903?text=" + encodeURIComponent(message);
   window.open(url, '_blank');
 }
+
+/* SCROLL REVEAL */
+const reveals = document.querySelectorAll('.reveal');
+function revealOnScroll(){
+  let trigger = window.innerHeight * 0.85;
+  reveals.forEach(el=>{
+    let top = el.getBoundingClientRect().top;
+    if(top < trigger){
+      el.classList.add('active');
+    }
+  });
+}
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
 </script>
 
 </body>
