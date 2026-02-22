@@ -27,7 +27,7 @@ nav{
 position:fixed;
 top:0;
 width:100%;
-padding:20px 8%;
+padding:1px 2%;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -41,13 +41,11 @@ backdrop-filter:blur(15px);
 box-shadow:0 0 20px rgba(255,215,0,0.2);
 }
 
-.logo{
-font-weight:900;
-font-size:24px;
-background:linear-gradient(90deg,#d4af37,#ffd700);
--webkit-background-clip:text;
-color:transparent;
-letter-spacing:2px;
+/* 🔥 LOGO IMAGE STYLE */
+.logo img{
+height:108px;
+width:auto;
+object-fit:contain;
 }
 
 .nav-links a{
@@ -216,7 +214,9 @@ box-shadow:0 0 20px #25D366;
 <body>
 
 <nav id="navbar">
-<div class="logo">AUTO BUZZZ</div>
+<div class="logo">
+<img src="logojpg.jpg" alt="Auto Buzzz Logo">
+</div>
 <div class="nav-links">
 <a href="#">Home</a>
 <a href="#services">Services</a>
@@ -271,13 +271,10 @@ box-shadow:0 0 20px #25D366;
 <a href="https://wa.me/919975707903" class="whatsapp">💬</a>
 
 <script>
-
-/* Navbar scroll */
 window.addEventListener("scroll",function(){
 document.getElementById("navbar").classList.toggle("scrolled",window.scrollY>50);
 });
 
-/* Reveal Animation */
 const sections = document.querySelectorAll("section");
 const cards = document.querySelectorAll(".card");
 
@@ -312,7 +309,6 @@ reveal();
 revealCards();
 });
 
-/* WhatsApp */
 function sendService(service){
 let message = `Hello Auto Buzzz,%0A I am interested in: ${service}.%0A Please share details.`;
 window.open(`https://wa.me/919975707903?text=${message}`,'_blank');
@@ -326,7 +322,6 @@ let service = document.getElementById("service").value;
 let message = `Hello Auto Buzzz,%0A Name: ${name}%0A Phone: ${phone}%0A Service Required: ${service}`;
 window.open(`https://wa.me/919975707903?text=${message}`,'_blank');
 }
-
 </script>
 
 </body>
