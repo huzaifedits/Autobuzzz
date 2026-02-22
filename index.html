@@ -73,7 +73,7 @@ transition:0.4s;
 width:100%;
 }
 
-/* ===== HERO (UNCHANGED STYLE) ===== */
+/* ===== HERO (UNCHANGED) ===== */
 .hero{
 height:100vh;
 display:flex;
@@ -97,16 +97,16 @@ animation:shine 3s linear infinite;
 to{background-position:200% center;}
 }
 
-/* ===== SECTION REVEAL ===== */
+/* ===== SECTION ANIMATION ===== */
 section{
 opacity:0;
-transform:translateY(50px);
-transition:1s;
+transform:translateY(60px) scale(0.98);
+transition:0.9s ease;
 }
 
 section.show{
 opacity:1;
-transform:translateY(0);
+transform:translateY(0) scale(1);
 }
 
 /* ===== SERVICES ===== */
@@ -135,6 +135,8 @@ padding:35px;
 border-radius:20px;
 cursor:pointer;
 transition:0.4s;
+opacity:0;
+transform:translateY(40px);
 }
 
 .card:hover{
@@ -269,23 +271,48 @@ box-shadow:0 0 20px #25D366;
 <a href="https://wa.me/919975707903" class="whatsapp">💬</a>
 
 <script>
-/* Navbar scroll effect */
+
+/* Navbar scroll */
 window.addEventListener("scroll",function(){
 document.getElementById("navbar").classList.toggle("scrolled",window.scrollY>50);
 });
 
-/* Scroll reveal */
+/* Reveal Animation */
 const sections = document.querySelectorAll("section");
-window.addEventListener("scroll",()=>{
+const cards = document.querySelectorAll(".card");
+
+function reveal(){
 sections.forEach(sec=>{
-const top = window.scrollY;
-const offset = sec.offsetTop - 400;
-if(top>offset){
+const rect = sec.getBoundingClientRect();
+if(rect.top < window.innerHeight - 100){
 sec.classList.add("show");
 }
 });
+}
+
+function revealCards(){
+cards.forEach((card,index)=>{
+const rect = card.getBoundingClientRect();
+if(rect.top < window.innerHeight - 80){
+setTimeout(()=>{
+card.style.opacity="1";
+card.style.transform="translateY(0)";
+}, index * 80);
+}
+});
+}
+
+window.addEventListener("scroll",()=>{
+reveal();
+revealCards();
 });
 
+window.addEventListener("load",()=>{
+reveal();
+revealCards();
+});
+
+/* WhatsApp */
 function sendService(service){
 let message = `Hello Auto Buzzz,%0A I am interested in: ${service}.%0A Please share details.`;
 window.open(`https://wa.me/919975707903?text=${message}`,'_blank');
@@ -299,6 +326,7 @@ let service = document.getElementById("service").value;
 let message = `Hello Auto Buzzz,%0A Name: ${name}%0A Phone: ${phone}%0A Service Required: ${service}`;
 window.open(`https://wa.me/919975707903?text=${message}`,'_blank');
 }
+
 </script>
 
 </body>
